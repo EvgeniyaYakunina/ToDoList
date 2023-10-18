@@ -20,13 +20,15 @@
     "@types/node": "^16.18.1",
     "@types/react": "^18.0.23",
     "@types/react-dom": "^18.0.7",
-    "@types/react-redux": "^7.1.25",
+    "@types/react-redux": "^7.1.27",
     "@types/uuid": "^9.0.1",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
     "styled-components": "^6.0.3",
     "typescript": "^4.8.4",
     "uuid": "^9.0.0",
@@ -37,10 +39,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "storybook dev -p 6008",
+    "storybook": "storybook dev -p 9009",
     "build-storybook": "storybook build",
     "jest:integration": "jest -c integration/jest.config.js",
-    "test:integration": "start-server-and-test storybook http-get://localhost:6008 jest:integration"
+    "test:integration": "start-server-and-test storybook http-get://localhost:9009 jest:integration"
   },
   "eslintConfig": {
     "extends": [
@@ -82,5 +84,11 @@
     "start-server-and-test": "^2.0.0",
     "storybook": "7.2.2",
     "webpack": "5.88.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }
+
