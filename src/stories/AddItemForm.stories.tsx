@@ -72,3 +72,7 @@ const AddItemFormWithError = (args: AddItemFormPropsType) => {
 export const AddItemFormWithErrorStory: Story = {
   render: args => <AddItemFormWithError addItem={args.addItem}/>
 }
+export const AddItemFormDisabledExample =(props: any)=>{
+  return (<AddItemForm disabled={true}
+      addItem={action('Button inside clicked')}/>)
+}

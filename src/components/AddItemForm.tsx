@@ -4,8 +4,9 @@ import {ControlPoint} from "@mui/icons-material";
 
 export type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled?: boolean
 }
-export const AddItemForm = memo((props: AddItemFormPropsType)=>{
+export const AddItemForm = memo(({addItem, disabled = false}: AddItemFormPropsType)=>{
     const [title, setTitle] = useState("");
     const [error, setError] = useState<string | null>(null);
 
@@ -16,13 +17,14 @@ export const AddItemForm = memo((props: AddItemFormPropsType)=>{
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if(error) setError(null);
         if (e.charCode === 13) {
-            addItem();
+            addItemHandler();
         }
+
     }
 
-    const addItem = () => {
+    const addItemHandler = () => {
         if (title.trim() !== "") {
-            props.addItem(title.trim());
+            addItem(title.trim());
             setTitle("");
         } else {
             setError("Title is required");
@@ -32,6 +34,7 @@ export const AddItemForm = memo((props: AddItemFormPropsType)=>{
     return(
         <div>
             <TextField value={title}
+                       disabled={disabled}
                        variant={'outlined'}
                        label={'Type value'}
                        onChange={onChangeHandler}
@@ -39,7 +42,7 @@ export const AddItemForm = memo((props: AddItemFormPropsType)=>{
                        error={!!error}
                        helperText={error}
             />
-            <IconButton onClick={addItem}  color={'primary'}><ControlPoint/></IconButton>
+            <IconButton onClick={addItemHandler} disabled={disabled} color={'primary'}><ControlPoint/></IconButton>
             {/*{error && <div className="error-message">{error}</div>}*/}
         </div>
     )

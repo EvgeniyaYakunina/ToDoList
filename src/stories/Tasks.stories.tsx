@@ -18,7 +18,7 @@ const meta: Meta<typeof Task> = {
 export default meta;
 type Story = StoryObj<typeof Task>;
 
-const TaskWithRedux = (props: TaskPropsType) => {
+export const TaskWithRedux = (props: TaskPropsType) => {
 
   let task = useSelector<AppRootStateType, TaskType>(state => state.tasks['todolistId1'][0])
 
