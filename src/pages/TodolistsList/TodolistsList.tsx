@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../state/store";
+import {AppRootStateType, useAppDispatch, useAppSelector} from "../../state/store";
 import {
     addTodoTC,
     changeTodolistFilterAC,
@@ -15,6 +15,7 @@ import Grid from "@mui/material/Grid";
 import {AddItemForm} from "../../components/AddItemForm";
 import Paper from "@mui/material/Paper";
 import {Todolist} from "./Todolist/Todolist";
+import {Navigate} from "react-router-dom";
 
 
 // type TodolistsListPropsType = {}
@@ -25,10 +26,12 @@ export const TodolistsList: React.FC<PropsType> = ({demo= false}) => {
 
     const todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useAppSelector<TasksStateType>(state => state.tasks)
+    const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if(demo){
+        if(demo || !isLoggedIn){
             return
         }
         dispatch(getTodoTC())
@@ -82,6 +85,9 @@ export const TodolistsList: React.FC<PropsType> = ({demo= false}) => {
         dispatch(addTodoTC(title))
     }, []);
 
+    if(!isLoggedIn){
+        return <Navigate to={"/login"}/>
+    }
 
     return <>
         <Grid container style={{padding: '20px'}}>
